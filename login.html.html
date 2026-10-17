@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ورود به حساب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1ec; --surface:#fbfcfa; --ink:#16211f; --muted:#5d6b68; --line:#ccd5d0;
+  --brand:#0e5f56; --brand-ink:#ffffff; --accent:#f0b429; --danger:#b3261e;
+  --panel:#0e5f56; --panel-ink:#eaf4f1;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1614; --surface:#162120; --ink:#e8efec; --muted:#9db0ab; --line:#2c3d3a;
+    --brand:#3fb8a5; --brand-ink:#08201c; --danger:#ff8a80; --panel:#0b2a26; --panel-ink:#cfe6e0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1614; --surface:#162120; --ink:#e8efec; --muted:#9db0ab; --line:#2c3d3a;
+  --brand:#3fb8a5; --brand-ink:#08201c; --danger:#ff8a80; --panel:#0b2a26; --panel-ink:#cfe6e0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+  font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;line-height:1.7;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.side{background:var(--panel);color:var(--panel-ink);padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between}
+.side .logo{font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:10px}
+.side .logo i{width:26px;height:26px;border-radius:7px;background:var(--accent);display:inline-block;position:relative}
+.side .logo i::after{content:"";position:absolute;inset:7px 7px 7px 11px;border-radius:2px;background:var(--panel)}
+.side h2{font-size:clamp(2.2rem,4.4vw,3.6rem);line-height:1.25;font-weight:800;margin:0 0 16px;letter-spacing:-.01em}
+.side p{margin:0;max-width:30ch;opacity:.85}
+.side small{opacity:.6}
+main{display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.box{width:100%;max-width:380px}
+h1{font-size:1.6rem;margin:0 0 6px;font-weight:700}
+.sub{color:var(--muted);margin:0 0 28px}
+.field{margin-bottom:18px}
+label{display:block;font-weight:500;margin-bottom:6px;font-size:.95rem}
+.wrap{position:relative}
+input[type=email],input[type=password],input[type=text]{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;transition:border-color .15s}
+input[dir=ltr]{text-align:left}
+input:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 70%,transparent);outline-offset:1px;border-color:var(--brand)}
+.field.bad input{border-color:var(--danger)}
+.err{color:var(--danger);font-size:.85rem;min-height:1.3em;margin-top:4px}
+.eye{position:absolute;inset-block:0;inset-inline-start:6px;border:0;background:none;color:var(--muted);
+  font:inherit;font-size:.85rem;cursor:pointer;padding:0 10px;border-radius:8px}
+.eye:focus-visible{outline:3px solid var(--accent)}
+#pass{padding-inline-start:64px}
+.row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 22px;font-size:.92rem}
+.row label{display:flex;gap:8px;align-items:center;margin:0;font-weight:400;cursor:pointer}
+.row input{accent-color:var(--brand);width:17px;height:17px}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+button.go{width:100%;font:inherit;font-weight:700;font-size:1rem;border:0;border-radius:10px;padding:13px;
+  background:var(--brand);color:var(--brand-ink);cursor:pointer;transition:transform .1s,opacity .15s}
+button.go:active{transform:scale(.985)}
+button.go:disabled{opacity:.65;cursor:wait}
+button.go:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.foot{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}
+.ok{text-align:center;padding:20px 0}
+.ok b{display:block;font-size:1.4rem;margin-bottom:8px}
+.ok button{margin-top:18px;background:none;border:1.5px solid var(--line);color:var(--ink);font:inherit;border-radius:10px;padding:9px 18px;cursor:pointer}
+[hidden]{display:none!important}
+@media (max-width:820px){
+  body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .side{padding:22px 24px;flex-direction:row;align-items:center}
+  .side h2,.side p,.side small{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="logo"><i></i> دفترچه</div>
+  <div>
+    <h2>دوباره<br>خوش آمدید</h2>
+    <p>یادداشت‌ها و کارهای‌تان همان‌جا که گذاشته بودید منتظرند.</p>
+  </div>
+  <small>نسخه ۲٫۴</small>
+</aside>
+
+<main>
+  <div class="box">
+    <form id="f" novalidate>
+      <h1>ورود به حساب</h1>
+      <p class="sub">ایمیل و رمز عبور خود را وارد کنید.</p>
+
+      <div class="field" id="fe">
+        <label for="email">ایمیل</label>
+        <input id="email" type="email" dir="ltr" autocomplete="username" inputmode="email" placeholder="name@example.com">
+        <div class="err" id="ee" role="alert"></div>
+      </div>
+
+      <div class="field" id="fp">
+        <label for="pass">رمز عبور</label>
+        <div class="wrap">
+          <input id="pass" type="password" dir="ltr" autocomplete="current-password">
+          <button type="button" class="eye" id="eye" aria-label="نمایش رمز عبور">نمایش</button>
+        </div>
+        <div class="err" id="pe" role="alert"></div>
+      </div>
+
+      <div class="row">
+        <label><input type="checkbox" id="rem"> مرا به خاطر بسپار</label>
+        <a href="#" id="forgot">رمز را فراموش کرده‌اید؟</a>
+      </div>
+
+      <button class="go" id="btn" type="submit">ورود</button>
+      <p class="foot">حساب ندارید؟ <a href="#">ثبت‌نام کنید</a></p>
+    </form>
+
+    <div class="ok" id="ok" hidden>
+      <b>وارد شدید</b>
+      <span id="who"></span>
+      <div><button id="out" type="button">خروج</button></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var f=$('f'),em=$('email'),pw=$('pass'),btn=$('btn');
+
+  try{var saved=localStorage.getItem('login_email');if(saved){em.value=saved;$('rem').checked=true}}catch(e){}
+
+  $('eye').addEventListener('click',function(){
+    var show=pw.type==='password';
+    pw.type=show?'text':'password';
+    this.textContent=show?'پنهان':'نمایش';
+    this.setAttribute('aria-label',show?'پنهان کردن رمز عبور':'نمایش رمز عبور');
+  });
+
+  function setErr(field,errEl,msg){
+    $(field).classList.toggle('bad',!!msg);
+    $(errEl).textContent=msg||'';
+  }
+  function check(){
+    var ok=true,e=em.value.trim();
+    if(!e){setErr('fe','ee','ایمیل را وارد کنید.');ok=false}
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e)){setErr('fe','ee','قالب ایمیل درست نیست.');ok=false}
+    else setErr('fe','ee','');
+    if(!pw.value){setErr('fp','pe','رمز عبور را وارد کنید.');ok=false}
+    else if(pw.value.length<8){setErr('fp','pe','رمز عبور دست‌کم ۸ نویسه است.');ok=false}
+    else setErr('fp','pe','');
+    return ok;
+  }
+  em.addEventListener('blur',function(){if(em.value)check()});
+
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(!check()){(f.querySelector('.bad input')||em).focus();return}
+    btn.disabled=true;btn.textContent='در حال ورود…';
+    /* اینجا درخواست واقعی به سرور خودتان را بگذارید، مثلاً با fetch('/api/login') */
+    setTimeout(function(){
+      try{
+        if($('rem').checked)localStorage.setItem('login_email',em.value.trim());
+        else localStorage.removeItem('login_email');
+      }catch(e){}
+      f.hidden=true;$('ok').hidden=false;
+      $('who').textContent=em.value.trim();
+      btn.disabled=false;btn.textContent='ورود';
+    },900);
+  });
+
+  $('out').addEventListener('click',function(){
+    $('ok').hidden=true;f.hidden=false;pw.value='';pw.focus();
+  });
+  $('forgot').addEventListener('click',function(ev){
+    ev.preventDefault();
+    if(!em.value.trim()){setErr('fe','ee','برای بازیابی، ابتدا ایمیل را وارد کنید.');em.focus()}
+    else setErr('fe','ee','');
+  });
+})();
+</script>
+</body>
+</html>
